@@ -1,3 +1,5 @@
+from typing import Any
+
 import httpx
 
 from app.config import settings
@@ -16,4 +18,5 @@ class NL2SQLService:
                 timeout=30.0,
             )
             response.raise_for_status()
-            return response.json()["sql"]
+            data: dict[str, Any] = response.json()
+            return str(data["sql"])

@@ -1,3 +1,5 @@
+from typing import Any
+
 from supabase import Client
 
 
@@ -13,5 +15,5 @@ class ReminderService:
         """Send reminder via email."""
         raise NotImplementedError
 
-    async def list_all(self) -> list[dict]:
+    async def list_all(self) -> list[dict[str, Any]]:
         raise NotImplementedError

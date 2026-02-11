@@ -1,7 +1,7 @@
 from app.workers.celery_app import celery_app
 
 
-@celery_app.task
+@celery_app.task  # type: ignore[untyped-decorator]
 def send_reminder(invoice_id: str, risk_level: str) -> None:
     """Generate and send a reminder for a specific invoice."""
     # 1. Fetch invoice + client details
