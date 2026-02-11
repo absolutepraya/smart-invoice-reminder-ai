@@ -7,12 +7,7 @@ async def get_all_invoices(db: Client) -> list[dict]:
 
 
 async def get_overdue_invoices(db: Client) -> list[dict]:
-    response = (
-        db.table("invoices")
-        .select("*")
-        .eq("status", "overdue")
-        .execute()
-    )
+    response = db.table("invoices").select("*").eq("status", "overdue").execute()
     return response.data
 
 
