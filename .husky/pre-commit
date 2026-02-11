@@ -1,0 +1,50 @@
+#!/bin/sh
+
+echo "Running pre-commit checks..."
+
+# 1. Frontend: Biome lint + format check
+echo "  [1/5] Checking frontend lint (Biome)..."
+cd apps/web && pnpm lint
+if [ $? -ne 0 ]; then
+  echo "Frontend lint failed. Run 'make format-web' to fix."
+  exit 1
+fi
+cd ../..
+
+# 2. Backend: Ruff lint + format check
+echo "  [2/5] Checking backend lint (Ruff)..."
+cd apps/api && uv run ruff check . && uv run ruff format --check .
+if [ $? -ne 0 ]; then
+  echo "Backend lint failed. Run 'make format-api' to fix."
+  exit 1
+fi
+cd ../..
+
+# 3. Frontend: Type check
+echo "  [3/5] Type checking frontend (tsc)..."
+cd apps/web && pnpm typecheck
+if [ $? -ne 0 ]; then
+  echo "Frontend type check failed."
+  exit 1
+fi
+cd ../..
+
+# 4. Backend: Type check
+echo "  [4/5] Type checking backend (mypy)..."
+cd apps/api && uv run mypy src/
+if [ $? -ne 0 ]; then
+  echo "Backend type check failed."
+  exit 1
+fi
+cd ../..
+
+# 5. Frontend: Dead code check
+echo "  [5/5] Checking for dead code (Knip)..."
+cd apps/web && pnpm knip
+if [ $? -ne 0 ]; then
+  echo "Dead code detected. Review knip output above."
+  exit 1
+fi
+cd ../..
+
+echo "Pre-commit checks passed!"

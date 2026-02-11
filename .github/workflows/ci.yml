@@ -88,7 +88,7 @@ jobs:
           python-version: "3.12"
       - run: uv sync
         working-directory: apps/api
-      - run: uv run ruff check .
+      - run: uv run ruff check . && uv run ruff format --check .
         working-directory: apps/api
 
   api-typecheck:

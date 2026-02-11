@@ -1,4 +1,4 @@
-.PHONY: dev dev-web dev-api dev-infra dev-worker build test test-web test-api lint lint-web lint-api db-migrate db-seed setup
+.PHONY: dev dev-web dev-api dev-infra dev-worker build test test-web test-api lint lint-web lint-api format format-web format-api db-migrate db-seed setup
 
 # ── Development ──────────────────────────────────────────────
 
@@ -42,7 +42,17 @@ lint-web: ## Lint frontend
 	cd apps/web && pnpm lint && pnpm typecheck
 
 lint-api: ## Lint backend
-	cd apps/api && uv run ruff check . && uv run mypy src/
+	cd apps/api && uv run ruff check . && uv run ruff format --check . && uv run mypy src/
+
+# ── Format ───────────────────────────────────────────────────
+
+format: format-web format-api ## Format all code
+
+format-web: ## Format frontend
+	cd apps/web && pnpm format
+
+format-api: ## Format backend
+	cd apps/api && uv run ruff format .
 
 # ── Database ─────────────────────────────────────────────────
 
