@@ -6,5 +6,5 @@ export function LoginPage() {
         <p className="text-gray-600">Smart Invoice Reminder AI</p>
       </div>
     </div>
-  );
+  )
 }

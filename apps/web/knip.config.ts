@@ -15,16 +15,9 @@ const config: KnipConfig = {
     'src/routeTree.gen.ts',
   ],
 
-  entry: [
-    'src/main.tsx!',
-    'src/routes/**/*.tsx!',
-  ],
+  entry: ['src/main.tsx!', 'src/routes/**/*.tsx!'],
 
-  project: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.test.{ts,tsx}',
-    '!src/**/*.spec.{ts,tsx}',
-  ],
+  project: ['src/**/*.{ts,tsx}', '!src/**/*.test.{ts,tsx}', '!src/**/*.spec.{ts,tsx}'],
 
   vitest: true,
 
