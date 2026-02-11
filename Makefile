@@ -64,11 +64,14 @@ db-seed: ## Seed local database
 
 # ── Setup ────────────────────────────────────────────────────
 
-setup: ## First-time project setup
+install: ## First-time project setup
 	@echo "Setting up Smart Invoice Reminder AI..."
+	@echo "========================================"
 	cd apps/web && pnpm install
+	@echo "========================================"
 	cd apps/api && uv sync
-	@echo "Done! Run 'make dev' to start developing."
+	@echo "========================================"
+	@echo "✅ Done! Run 'make dev' to start developing."
 
 # ── Help ─────────────────────────────────────────────────────
 
