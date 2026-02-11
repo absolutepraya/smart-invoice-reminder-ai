@@ -25,7 +25,7 @@ importers:
         version: 19.2.4(react@19.2.4)
     devDependencies:
       '@biomejs/biome':
-        specifier: ^2.2.0
+        specifier: ^2.3.14
         version: 2.3.14
       '@tanstack/react-router-devtools':
         specifier: ^1.92.0

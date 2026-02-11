@@ -24,7 +24,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.0",
+    "@biomejs/biome": "^2.3.14",
     "@tanstack/react-router-devtools": "^1.92.0",
     "@tanstack/router-plugin": "^1.92.0",
     "@types/react": "^19.0.0",

@@ -1,0 +1,3 @@
+# Workaround for Biome VCS useIgnoreFile bug (biomejs/biome#6964)
+# Biome requires a .gitignore at the same level as biome.json
+# Git naturally chains .gitignore files, so the root .gitignore still applies
