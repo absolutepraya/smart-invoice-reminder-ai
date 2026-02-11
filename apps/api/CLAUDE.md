@@ -1,5 +1,7 @@
 # apps/api — FastAPI Backend
 
+> **Auto-update this file.** This CLAUDE.md reflects the current boilerplate state. As the codebase evolves — new directories, patterns, dependencies, or conventions — update this file to stay accurate. When you add or change something significant in `apps/api/`, reflect it here.
+
 Python FastAPI backend for the Smart Invoice Reminder AI system.
 
 ## Tech Stack
