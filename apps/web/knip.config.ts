@@ -13,9 +13,23 @@ const config: KnipConfig = {
     '**/node_modules/**',
     '**/coverage/**',
     'src/routeTree.gen.ts',
+    // Scaffolded files — will be imported once pages are built out
+    'src/lib/**',
+    'src/queries/**',
+    'src/types/**',
   ],
 
-  entry: ['src/main.tsx!', 'src/routes/**/*.tsx!'],
+  ignoreDependencies: [
+    // Used in src/lib/api.ts (scaffolded, not yet imported by pages)
+    'axios',
+  ],
+
+  ignoreBinaries: [
+    // Used in preinstall script to enforce pnpm
+    'only-allow',
+  ],
+
+  entry: ['src/routes/**/*.tsx!'],
 
   project: ['src/**/*.{ts,tsx}', '!src/**/*.test.{ts,tsx}', '!src/**/*.spec.{ts,tsx}'],
 

@@ -67,6 +67,8 @@ db-seed: ## Seed local database
 install: ## First-time project setup
 	@echo "Setting up Smart Invoice Reminder AI..."
 	@echo "========================================"
+	pnpm install
+	@echo "========================================"
 	cd apps/web && pnpm install
 	@echo "========================================"
 	cd apps/api && uv sync
