@@ -166,6 +166,9 @@ The NL2SQL model runs on a **separate GPU server**. The backend communicates wit
 
 ## Development Workflow
 
+### Branch Naming
+Format: `<name>/<type>/<short-description>` (e.g. `abhip/feat/automate-email-sending`, `abhip/fix/risk-scoring-crash`)
+
 ### Planning & Implementation
 1. **For substantial changes (500+ lines)**: Create brief design document in `docs/plans/`
 2. **Question assumptions**: "What's the fastest way to test this hypothesis?"

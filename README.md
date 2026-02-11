@@ -240,13 +240,30 @@ pnpm install    # In project root — this triggers Husky setup
 
 ## Development Workflow
 
-### Branching
+### Branch Naming
+
+```
+<name>/<type>/<short-description>
+```
+
+- **name** — your nickname (e.g. `abhip`, `daffa`)
+- **type** — `feat`, `fix`, `refactor`, `chore`, `test`, `docs`
+- **short-description** — kebab-case, what it's about
+
+Examples:
+```
+abhip/feat/automate-email-sending
+abhip/fix/risk-scoring-crash
+abhip/chore/refactor-dashboard-page
+```
+
+### Workflow
 
 ```bash
 # Create a feature branch from main
 git checkout main
 git pull
-git checkout -b feat/your-feature-name
+git checkout -b abhip/feat/invoice-list-page
 
 # Work on your changes...
 
@@ -255,7 +272,7 @@ git add .
 git commit -m "feat(web): add invoice list page"
 
 # Push
-git push -u origin feat/your-feature-name
+git push -u origin abhip/feat/invoice-list-page
 ```
 
 ### Commit Message Format
