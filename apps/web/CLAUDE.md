@@ -1,6 +1,6 @@
 # apps/web — Frontend Dashboard
 
-> **Auto-update this file.** This CLAUDE.md reflects the current boilerplate state. As the codebase evolves — new directories, patterns, dependencies, or conventions — update this file to stay accurate. When you add or change something significant in `apps/web/`, reflect it here.
+> **Auto-update this file.** This CLAUDE.md should always reflect the current state of the codebase. When you add or change something significant in `apps/web/` — new directories, patterns, dependencies, or conventions — update this file to stay accurate.
 
 React + Vite SPA for the AR Risk & Collection Dashboard.
 
