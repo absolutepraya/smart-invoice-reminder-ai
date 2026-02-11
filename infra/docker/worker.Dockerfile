@@ -1,0 +1,12 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+COPY apps/api/pyproject.toml apps/api/uv.lock* ./
+RUN uv sync --no-dev --frozen
+
+COPY apps/api/src/ ./src/
+
+CMD ["uv", "run", "celery", "-A", "app.workers.celery_app", "worker", "--loglevel=info"]
