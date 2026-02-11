@@ -1,35 +1,119 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.0/schema.json",
-  "organizeImports": {
-    "enabled": true
+  "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/build",
+      "!**/coverage",
+      "!**/public",
+      "!**/src/routeTree.gen.ts",
+      "!**/.claude"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "useEditorconfig": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 100,
+    "attributePosition": "auto",
+    "bracketSpacing": true
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
-      "correctness": {
-        "useExhaustiveDependencies": "warn",
-        "noUnusedImports": "error",
-        "noUnusedVariables": "error"
-      },
       "style": {
-        "noNonNullAssertion": "off"
+        "useImportType": "error",
+        "useExportType": "error",
+        "noDefaultExport": "off",
+        "useConst": "error",
+        "noNonNullAssertion": "off",
+        "useLiteralEnumMembers": "error",
+        "useAsConstAssertion": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "useExponentiationOperator": "error",
+        "useTemplate": "error",
+        "noParameterAssign": "error",
+        "useDefaultParameterLast": "error",
+        "noUselessElse": "error",
+        "useShorthandFunctionType": "error"
+      },
+      "performance": {
+        "recommended": true,
+        "noDelete": "warn"
+      },
+      "a11y": {
+        "recommended": true,
+        "useKeyWithClickEvents": "error",
+        "useValidAnchor": "error",
+        "noSvgWithoutTitle": "warn",
+        "noAriaUnsupportedElements": "warn",
+        "useAltText": "warn",
+        "useAriaPropsForRole": "warn",
+        "useValidAriaProps": "warn",
+        "useValidAriaValues": "warn"
+      },
+      "correctness": {
+        "noUnusedVariables": "error",
+        "useHookAtTopLevel": "error",
+        "noChildrenProp": "error",
+        "useExhaustiveDependencies": "warn",
+        "useJsxKeyInIterable": "error",
+        "noUnusedImports": "error",
+        "noNestedComponentDefinitions": "off"
+      },
+      "complexity": {
+        "useLiteralKeys": "error",
+        "noForEach": "off",
+        "useOptionalChain": "error",
+        "noBannedTypes": "off",
+        "noCommaOperator": "error",
+        "noArguments": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noEmptyInterface": "warn",
+        "noRedeclare": "error",
+        "noArrayIndexKey": "off",
+        "useIterableCallbackReturn": "off",
+        "noUnknownAtRules": "error"
       }
     }
   },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineWidth": 100
-  },
   "javascript": {
+    "globals": ["React"],
     "formatter": {
-      "quoteStyle": "double",
-      "semicolons": "always"
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "es5",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "always",
+      "bracketSameLine": false,
+      "quoteStyle": "single",
+      "attributePosition": "auto",
+      "bracketSpacing": true
     }
-  },
-  "files": {
-    "ignore": ["dist/", "node_modules/", "src/routeTree.gen.ts"]
   }
 }
