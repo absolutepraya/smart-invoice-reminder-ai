@@ -77,7 +77,6 @@ apps/
 infra/          # Docker, Nginx, Compose configs
 supabase/       # Migrations, seed data, config
 .github/        # CI/CD workflows
-scripts/        # Dev helper scripts
 docs/           # Design documents and plans
 ```
 
@@ -308,7 +307,7 @@ Pre-push runs tests and type checks for both apps.
 node >= 22, pnpm >= 9, python >= 3.12, uv, docker, supabase CLI
 
 # First time
-./scripts/setup.sh    # Or: make install
+make install
 
 # Daily
 make dev              # Start everything

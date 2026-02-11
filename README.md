@@ -122,8 +122,7 @@ cd smart-invoice-reminder-ai
 make install
 
 # 3. Set up environment variables
-cp apps/web/.env.example apps/web/.env
-cp apps/api/.env.example apps/api/.env
+cp .env.example .env.local
 
 # 4. Start Docker Desktop (if not already running)
 open -a Docker
@@ -183,7 +182,6 @@ smart-invoice-reminder-ai/
 ├── infra/                   # Dockerfiles, Compose, Nginx
 ├── .github/workflows/       # CI (runs on every PR) + deploy
 ├── .claude/commands/        # AI assistant commands
-├── scripts/                 # Setup and dev helper scripts
 └── docs/plans/              # Design documents
 ```
 
@@ -322,7 +320,3 @@ npm install -g pnpm
 brew install uv
 ```
 
-**"Permission denied on scripts"**
-```bash
-chmod +x scripts/*.sh
-```
