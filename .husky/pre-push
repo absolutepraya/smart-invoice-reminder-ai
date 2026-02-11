@@ -27,8 +27,11 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "  Testing backend..."
-uv run pytest
-if [ $? -ne 0 ]; then
+# pytest exits 5 when no tests are collected — treat as success
+# Use || to prevent set -e from killing the script on non-zero exit
+rc=0
+uv run pytest || rc=$?
+if [ $rc -ne 0 ] && [ $rc -ne 5 ]; then
   echo "Backend tests failed."
   exit 1
 fi
