@@ -10,6 +10,7 @@ COPY apps/web/ .
 RUN pnpm build
 
 FROM nginx:alpine
+LABEL org.opencontainers.image.source=https://github.com/absolutepraya/smart-invoice-reminder-ai
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY infra/docker/nginx-spa.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
