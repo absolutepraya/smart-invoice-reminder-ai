@@ -1,8 +1,10 @@
 name: Deploy
 
 on:
-  push:
+  workflow_run:
+    workflows: ["CI"]
     branches: [main]
+    types: [completed]
 
 env:
   VPS_HOST: ${{ secrets.VPS_HOST }}
@@ -12,6 +14,7 @@ env:
 jobs:
   deploy:
     name: Deploy to VPS
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
