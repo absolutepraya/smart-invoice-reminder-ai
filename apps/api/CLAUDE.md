@@ -10,7 +10,7 @@ Python FastAPI backend for the Smart Invoice Reminder AI system.
 - **Pydantic** — request/response validation
 - **Supabase** — database (Postgres) via Python client
 - **Celery + Redis** — background job processing and scheduling
-- **httpx** — async HTTP client (for ML scoring API)
+- **httpx** — async HTTP client (for external API calls)
 - **Ruff** — linting + formatting
 - **mypy** — static type checking (strict mode)
 - **pytest** — testing

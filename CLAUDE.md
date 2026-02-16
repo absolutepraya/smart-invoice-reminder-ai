@@ -62,7 +62,7 @@ We don't believe in time estimates - they're never accurate. Instead, estimate t
 **Smart Invoice Reminder AI** is an AI-powered system that automates invoice collection reminders. It monitors payment status, assesses client risk levels using ML, and sends personalized reminders with appropriate tone — polite (SOPAN), firm (TEGAS), or warning (PERINGATAN) — based on each client's payment behavior.
 
 ### Key Features
-- **ML Risk Scoring Pipeline** - Predicts payment likelihood using payment history (days_late), logs probability scores with model versioning for drift detection
+- **ML Risk Scoring Pipeline** - Trained ML model runs inside the Celery Worker to predict payment likelihood using payment history (days_late), logs probability scores with model versioning for drift detection
 - **Smart Reminder Generator** - Generates contextual reminders adapted to risk level (LOW→SOPAN, MEDIUM→TEGAS, HIGH→PERINGATAN) via EMAIL/WHATSAPP/SMS
 - **Payment Tracking** - Records payments with late-day calculation as key ML training feature
 - **Automated Workflow** - Celery-based scheduled checks and reminder dispatch with duplicate-send prevention
