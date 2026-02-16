@@ -10,7 +10,7 @@ Python FastAPI backend for the Smart Invoice Reminder AI system.
 - **Pydantic** — request/response validation
 - **Supabase** — database (Postgres) via Python client
 - **Celery + Redis** — background job processing and scheduling
-- **httpx** — async HTTP client (for NL2SQL service)
+- **httpx** — async HTTP client (for ML scoring API)
 - **Ruff** — linting + formatting
 - **mypy** — static type checking (strict mode)
 - **pytest** — testing
@@ -35,7 +35,7 @@ src/app/
   config.py         → Pydantic Settings (env vars)
   dependencies.py   → Shared FastAPI dependencies (get_db, etc.)
   routers/          → HTTP handlers (thin — delegate to services)
-  services/         → Business logic (risk scoring, reminders, NL2SQL)
+  services/         → Business logic (risk scoring, reminders, payments)
   models/           → Pydantic schemas (request/response)
   db/
     client.py       → Supabase client initialization
@@ -71,7 +71,7 @@ Celery Beat (cron) → check_overdue task → queries overdue invoices
 ### Key Patterns
 
 - **Routers are thin** — handle HTTP concerns only (validation, auth, status codes). Delegate all logic to services.
-- **Services hold business logic** — risk calculation, reminder generation, NL2SQL calls. No HTTP or DB specifics.
+- **Services hold business logic** — risk calculation, reminder generation, payment recording. No HTTP or DB specifics.
 - **DB queries are isolated** — all Supabase interaction lives in `db/queries/`. Services never call Supabase directly.
 - **Workers are independent** — Celery tasks run in separate processes. They use services and DB layer like routers do.
 
@@ -153,22 +153,6 @@ def send_reminder(self, invoice_id: str, risk_level: str) -> None:
 - Line length: 100 characters
 - Imports sorted by Ruff (isort rules)
 
-## NL2SQL Service
-
-The NL2SQL model runs on a **separate GPU server**. Communication is via HTTP:
-
-```python
-# src/app/services/nl2sql_service.py
-async with httpx.AsyncClient() as client:
-    response = await client.post(
-        f"{self.base_url}/generate",
-        json={"prompt": natural_language},
-        timeout=30.0,
-    )
-```
-
-If the model is swapped later, only `nl2sql_service.py` changes. No other code is affected.
-
 ## Common Pitfalls
 
 - **Never skip type hints** — all functions need typed params and return types
@@ -189,5 +173,4 @@ Defined in `config.py` via Pydantic Settings:
 | `SUPABASE_URL` | Supabase instance URL | (required) |
 | `SUPABASE_KEY` | Supabase anon/service key | (required) |
 | `REDIS_URL` | Redis broker URL | `redis://localhost:6379/0` |
-| `NL2SQL_API_URL` | NL2SQL inference server | `http://localhost:8080` |
 | `CORS_ORIGINS` | Allowed CORS origins | `["http://localhost:3000"]` |

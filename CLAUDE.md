@@ -59,13 +59,13 @@ We don't believe in time estimates - they're never accurate. Instead, estimate t
 
 ## Project Overview
 
-**Smart Invoice Reminder AI** is an AI-powered system that automates invoice collection reminders. It monitors payment status, assesses client risk levels using AI, and sends personalized reminders with appropriate tone (friendly, firm, or serious) based on each client's payment behavior.
+**Smart Invoice Reminder AI** is an AI-powered system that automates invoice collection reminders. It monitors payment status, assesses client risk levels using ML, and sends personalized reminders with appropriate tone — polite (SOPAN), firm (TEGAS), or warning (PERINGATAN) — based on each client's payment behavior.
 
 ### Key Features
-- **AI Risk Scoring Engine** - Categorizes clients into Low/Medium/High risk based on payment history
-- **Smart Reminder Generator** - Generates contextual, professional reminders adapted to risk level
-- **NL2SQL Interface** - Natural language queries converted to SQL for the dashboard
-- **Automated Workflow** - Celery-based scheduled checks and reminder dispatch
+- **ML Risk Scoring Pipeline** - Predicts payment likelihood using payment history (days_late), logs probability scores with model versioning for drift detection
+- **Smart Reminder Generator** - Generates contextual reminders adapted to risk level (LOW→SOPAN, MEDIUM→TEGAS, HIGH→PERINGATAN) via EMAIL/WHATSAPP/SMS
+- **Payment Tracking** - Records payments with late-day calculation as key ML training feature
+- **Automated Workflow** - Celery-based scheduled checks and reminder dispatch with duplicate-send prevention
 - **AR Dashboard** - Real-time visibility into receivables and risk levels
 
 ## Monorepo Structure
@@ -152,12 +152,9 @@ make db-seed        # Reset and seed local database
 
 ### Backend: Router → Service → DB
 - **Routers** (`routers/`) handle HTTP concerns (validation, auth, status codes)
-- **Services** (`services/`) hold business logic (risk scoring, reminder generation)
+- **Services** (`services/`) hold business logic (risk scoring, reminder generation, payment tracking)
 - **DB** (`db/`) isolates all Supabase/SQL interaction
 - **Workers** (`workers/`) are Celery tasks that run independently
-
-### NL2SQL Service
-The NL2SQL model runs on a **separate GPU server**. The backend communicates with it via HTTP API calls through `nl2sql_service.py`. If the model is swapped, only this file changes.
 
 ### Background Jobs
 - **Celery Beat** triggers scheduled tasks (daily overdue invoice check)
@@ -220,7 +217,7 @@ class InvoiceService:
 
 # DB: pure data access
 async def get_overdue_invoices(db: Client) -> list[dict]:
-    return db.table("invoices").select("*").eq("status", "overdue").execute().data
+    return db.table("invoices").select("*").eq("status", "OVERDUE").execute().data
 ```
 
 ### Celery Task Conventions

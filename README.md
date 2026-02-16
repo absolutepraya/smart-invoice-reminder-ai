@@ -20,8 +20,8 @@ AI-powered invoice collection automation with risk-based scoring and personalize
 
 A system that automatically reminds clients to pay their invoices. It:
 1. Checks which invoices are overdue (daily)
-2. Scores each client's payment risk (low/medium/high)
-3. Generates and sends personalized reminder emails — friendly for low risk, firm for high risk
+2. Scores each client's payment risk using ML — predicts likelihood of late payment and categorizes as LOW/MEDIUM/HIGH
+3. Generates and sends personalized reminders with tone adapted to risk level — polite (SOPAN), firm (TEGAS), or warning (PERINGATAN) — via email, WhatsApp, or SMS
 4. Provides a dashboard for the finance team to monitor everything
 
 ## Tech Stack
