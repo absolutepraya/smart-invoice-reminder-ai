@@ -2,7 +2,7 @@ services:
   web:
     image: ghcr.io/absolutepraya/smart-invoice-reminder-ai/web:latest
     ports:
-      - "3000:80"
+      - "3002:80"
     restart: unless-stopped
 
   api:
