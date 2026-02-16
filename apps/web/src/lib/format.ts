@@ -13,7 +13,7 @@ export function formatDate(date: string | Date): string {
   }).format(new Date(date))
 }
 
-export function formatRiskLevel(level: 'low' | 'medium' | 'high'): string {
-  const labels = { low: 'Low', medium: 'Medium', high: 'High' } as const
+export function formatRiskLevel(level: 'LOW' | 'MEDIUM' | 'HIGH'): string {
+  const labels = { LOW: 'Low', MEDIUM: 'Medium', HIGH: 'High' } as const
   return labels[level]
 }

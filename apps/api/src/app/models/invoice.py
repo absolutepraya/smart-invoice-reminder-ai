@@ -1,13 +1,13 @@
+from datetime import date
+
 from pydantic import BaseModel
 
 
 class InvoiceResponse(BaseModel):
     id: str
     client_id: str
-    client_name: str
+    invoice_number: str
     amount: float
-    currency: str
+    issued_date: date
+    due_date: date
     status: str
-    due_date: str
-    days_overdue: int
-    risk_level: str

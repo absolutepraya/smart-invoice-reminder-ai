@@ -1,8 +1,12 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
 class ClientResponse(BaseModel):
     id: str
-    name: str
+    company_name: str
     email: str
-    risk_level: str
+    phone: str | None = None
+    current_risk_category: str
+    created_at: datetime

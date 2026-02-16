@@ -1,32 +1,54 @@
-import type { InvoiceStatus, RiskLevel } from '@/lib/constants'
+import type {
+  DeliveryStatus,
+  InvoiceStatus,
+  MessageType,
+  ReminderChannel,
+  RiskLevel,
+} from '@/lib/constants'
 
 export interface Client {
   id: string
-  name: string
+  company_name: string
   email: string
-  risk_level: RiskLevel
+  phone: string | null
+  current_risk_category: RiskLevel
   created_at: string
 }
 
 export interface Invoice {
   id: string
   client_id: string
-  client_name: string
+  invoice_number: string
   amount: number
-  currency: string
-  status: InvoiceStatus
+  issued_date: string
   due_date: string
-  days_overdue: number
-  risk_level: RiskLevel
-  created_at: string
+  status: InvoiceStatus
+}
+
+export interface Payment {
+  id: string
+  invoice_id: string
+  amount_paid: number
+  payment_date: string
+  days_late: number
+}
+
+export interface RiskScoringLog {
+  id: string
+  client_id: string
+  evaluation_date: string
+  probability_score: number
+  risk_label: RiskLevel
+  model_version: string
 }
 
 export interface Reminder {
   id: string
   invoice_id: string
-  client_name: string
-  channel: 'email' | 'whatsapp' | 'telegram'
-  status: 'sent' | 'failed' | 'pending'
+  channel: ReminderChannel
+  message_type: MessageType
+  message_content: string
+  delivery_status: DeliveryStatus
   sent_at: string
 }
 

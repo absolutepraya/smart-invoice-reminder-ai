@@ -8,12 +8,26 @@ class ReminderService:
         self.db = db
 
     async def generate_reminder(self, invoice_id: str, risk_level: str) -> str:
-        """Generate reminder message adapted to risk level."""
+        """Generate reminder message with tone adapted to risk level.
+
+        Mapping: LOW -> SOPAN, MEDIUM -> TEGAS, HIGH -> PERINGATAN.
+        """
         raise NotImplementedError
 
-    async def send_email(self, to: str, subject: str, body: str) -> bool:
-        """Send reminder via email."""
+    async def send_reminder(
+        self,
+        invoice_id: str,
+        channel: str,
+        message_type: str,
+        content: str,
+    ) -> dict[str, Any]:
+        """Send reminder via channel and log to reminder_logs table.
+
+        Before sending, check reminder_logs to prevent duplicate sends
+        on the same day for the same invoice.
+        """
         raise NotImplementedError
 
     async def list_all(self) -> list[dict[str, Any]]:
+        """List all reminder logs."""
         raise NotImplementedError

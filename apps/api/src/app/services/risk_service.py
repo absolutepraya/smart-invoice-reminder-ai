@@ -8,7 +8,12 @@ class RiskService:
         self.db = db
 
     async def calculate_risk(self, client_id: str) -> str:
-        """Calculate risk level for a client based on payment history."""
+        """Run ML model to predict payment risk for a client.
+
+        Uses payment history (days_late from payments table) to produce
+        a probability_score and risk_label. Results are logged to
+        risk_scoring_logs for drift tracking.
+        """
         raise NotImplementedError
 
     async def get_summary(self) -> dict[str, Any]:
